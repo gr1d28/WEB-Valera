@@ -4,23 +4,18 @@
     public interface IValeraService
     {
         Task<List<Valera>> GetAllValerasAsync();
-        Task<Valera> GetValeraByIdAsync(int id);
+        Task<List<Valera>> GetUserValerasAsync(int userId);
+        Task<Valera> GetValeraByIdAsync(int id, int userId, bool isAdmin = false);
         Task<Valera> CreateValeraAsync(Valera valera);
-        Task<Valera> UpdateValeraAsync(int id, Valera valera);
-        Task<bool> DeleteValeraAsync(int id);
+        Task<Valera> UpdateValeraAsync(int id, Valera valera, int userId, bool isAdmin = false);
+        Task<bool> DeleteValeraAsync(int id, int userId, bool isAdmin = false);
 
-        Task<Valera> WorkAsync(int id);
-
-        Task<Valera> ContemplateNatureAsync(int id);
-
-        Task<Valera> DrinkWineWatchSeriesAsync(int id);
-
-        Task<Valera> GoToBarAsync(int id);
-
-        Task<Valera> DrinkWithFriendsAsync(int id);
-
-        Task<Valera> SingInSubwayAsync(int id);
-
-        Task<Valera> SleepAsync(int id);
+        Task<Valera> WorkAsync(int id, int userId, bool isAdmin = false);
+        Task<Valera> ContemplateNatureAsync(int id, int userId, bool isAdmin = false);
+        Task<Valera> DrinkWineWatchSeriesAsync(int id, int userId, bool isAdmin = false);
+        Task<Valera> GoToBarAsync(int id, int userId, bool isAdmin = false);
+        Task<Valera> DrinkWithFriendsAsync(int id, int userId, bool isAdmin = false);
+        Task<Valera> SingInSubwayAsync(int id, int userId, bool isAdmin = false);
+        Task<Valera> SleepAsync(int id, int userId, bool isAdmin = false);
     }
 }

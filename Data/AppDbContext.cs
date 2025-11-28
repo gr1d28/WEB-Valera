@@ -9,6 +9,7 @@ namespace Valera.Data
         }
 
         public DbSet<Valera.Models.Valera> Valeras { get; set; }
+        public DbSet<Valera.Models.User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

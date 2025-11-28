@@ -9,7 +9,6 @@
         public int Fatigue { get; set; } = 0;       //усталость
         public int Money { get; set; } = 512;   //на неделю
         public int UserId { get; set; }
-        public User User { get; set; }
 
         public Valera() { }
         public Valera(int id, int health, int mana, int cheerfulness, int fatigue, int money)
