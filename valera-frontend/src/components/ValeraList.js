@@ -14,13 +14,33 @@ const ValeraList = () => {
         money: 512
     });
     const [loading, setLoading] = useState(false);
+    const [userRole, setUserRole] = useState(null); // Добавляем состояние для роли
     const navigate = useNavigate();
 
-    // Загрузка списка Валер
+    // Получение информации о пользователе
+    const getUserRole = async () => {
+        try {
+            const response = await valeraAPI.getUserRole(); // Предполагаемый метод API
+            setUserRole(response.data);
+            return response.data;
+        } catch (error) {
+            console.error('Ошибка получения информации о пользователе:', error);
+            return 'User'; // По умолчанию считаем User
+        }
+    };
+
+    // Загрузка списка Валер в зависимости от роли
     const loadValeras = async () => {
         try {
             setLoading(true);
-            const response = await valeraAPI.getAll();
+            let response;
+
+            if (userRole === 'Admin') {
+                response = await valeraAPI.getAll(); // Метод для получения всех Валер
+            } else {
+                response = await valeraAPI.getUserValeras(); // Метод для получения Валер текущего пользователя
+            }
+
             setValeras(response.data);
         } catch (error) {
             console.error('Ошибка загрузки Валер:', error);
@@ -31,8 +51,12 @@ const ValeraList = () => {
     };
 
     useEffect(() => {
-        loadValeras();
-    }, []);
+        const initialize = async () => {
+            await getUserRole();
+            await loadValeras();
+        };
+        initialize();
+    }, [userRole]); // Зависимость от userRole
 
     // Фильтрация по ID
     const filteredValeras = valeras.filter(valera =>

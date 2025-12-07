@@ -23,8 +23,8 @@ namespace Valera.Services
 
         public async Task<User> RegisterAsync(RegisterRequest request)
         {
-            if (await _context.Users.AnyAsync(u => u.Username == request.Username))
-                throw new Exception("Username уже занят");
+            if (await _context.Users.AnyAsync(u => u.Email == request.Email))
+                throw new Exception("Email уже занят");
 
             var user = new User
             {
@@ -41,7 +41,7 @@ namespace Valera.Services
 
         public async Task<string> LoginAsync(LoginRequest request)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
             if (user == null)
                 throw new Exception("Пользователь не найден");
 

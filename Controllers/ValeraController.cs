@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Text;
 using Valera.Services;
 
 namespace Valera.Controllers
@@ -34,6 +35,12 @@ namespace Valera.Controllers
         private bool IsAdmin()
         {
             return GetCurrentUserRole() == "Admin";
+        }
+
+        [HttpGet("role")]
+        public async Task<ActionResult<string>> GetUserInfo()
+        {
+            return GetCurrentUserRole();
         }
 
         [HttpGet]

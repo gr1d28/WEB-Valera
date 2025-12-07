@@ -12,8 +12,8 @@ using Valera.Data;
 namespace Valera.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251128094824_AddUserAndAuth")]
-    partial class AddUserAndAuth
+    [Migration("20251128184053_AddAuthAndLogin")]
+    partial class AddAuthAndLogin
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -92,13 +92,11 @@ namespace Valera.Migrations
 
             modelBuilder.Entity("Valera.Models.Valera", b =>
                 {
-                    b.HasOne("Valera.Models.User", "User")
+                    b.HasOne("Valera.Models.User", null)
                         .WithMany("Valeras")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Valera.Models.User", b =>

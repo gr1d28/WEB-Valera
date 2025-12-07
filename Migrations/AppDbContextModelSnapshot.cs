@@ -89,13 +89,11 @@ namespace Valera.Migrations
 
             modelBuilder.Entity("Valera.Models.Valera", b =>
                 {
-                    b.HasOne("Valera.Models.User", "User")
+                    b.HasOne("Valera.Models.User", null)
                         .WithMany("Valeras")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Valera.Models.User", b =>

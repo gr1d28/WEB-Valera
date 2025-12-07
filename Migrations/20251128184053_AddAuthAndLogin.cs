@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Valera.Migrations
 {
     /// <inheritdoc />
-    public partial class AddUserAndAuth : Migration
+    public partial class AddAuthAndLogin : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

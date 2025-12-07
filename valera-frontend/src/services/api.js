@@ -6,8 +6,34 @@ const api = axios.create({
     baseURL: API_BASE_URL,
 });
 
+// Добавляем токен к каждому запросу
+api.interceptors.request.use((config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+});
+
+// Обрабатываем ошибки авторизации
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (error.response?.status === 401) {
+            localStorage.removeItem('token');
+            window.location.href = '/login';
+        }
+        return Promise.reject(error);
+    }
+);
+
 export const valeraAPI = {
+    login: (credentials) => api.post('/auth/login', credentials),
+    register: (userData) => api.post('/auth/register', userData),
+
     getAll: () => api.get('/valera'),
+    getUserValeras: () => api.get(`/valera/my`),
+    getUserRole: () => api.get(`/valera/role`),
     getById: (id) => api.get(`/valera/${id}`),
     create: (valera) => api.post('/valera', valera),
     update: (id, valera) => api.put(`/valera/${id}`, valera),
